@@ -1,0 +1,39 @@
+
+{
+"private": true,
+"name": "dfd web app Automations",
+"version": "5.6.0",
+"description": "Acceptance tests",
+"license": "SEE LICENSE IN LICENSE",
+"author": {
+ "name": "Orchestral Developments Ltd."
+},
+"scripts": {
+ "dfd:e2e": "testcafe -c 3 chrome ./dfd/tests/e2e/*/*-tests.js --fixture-meta testable=true --selector-timeout 30000 --assertion-timeout 30000 --page-load-timeout 50000 --skip-js-errors --allow-insecure-localhost --allow-running-insecure-content -q",
+ "dfd:remote": "testcafe remote ./dfd/tests/e2e//-tests.js --qr-code",
+ "pp_web:e2e": "testcafe -c 4 chrome ./web/tests/e2e//-tests.js --fixture-meta testable=true --reporter spec,junit:e2e_report.xml,html:e2e_report.html --selector-timeout 30000 --assertion-timeout 30000 --page-load-timeout 50000 --skip-js-errors -q",
+ "pp_web:e2e:actualImage": "testcafe -c 2 firefox:headless ./web/tests/visual-regression//-tests.js --fixture-meta testable=true --reporter spec,junit:actual_report.xml,html:actual_report.html -s ./acceptance-tests/web/screenshots/ -p '${BROWSER}/${FIXTURE}/${TEST}/actual.png' --selector-timeout 30000 --assertion-timeout 30000 --page-load-timeout 50000 --skip-js-errors -q",
+ "pp_web:e2e:baseImage": "testcafe -c 2 firefox:headless .//tests/visual-regression//*-tests.js --fixture-meta testable=true --reporter spec,junit:base_report.xml,html:base_report.html -s ./acceptance-tests/web/screenshots/ -p '${BROWSER}/${FIXTURE}/${TEST}/base.png' --selector-timeout 30000 --assertion-timeout 30000 --page-load-timeout 50000 --skip-js-errors -q",
+ "pp_web:e2e:hook:actualimage": "node ./web/support/hooks.js -a -d",
+ "pp_web:e2e:hook:baseimage": "node ./web/support/hooks.js -b -d",
+ "pp_web:e2e:imageTest": "testcafe-blink-diff ./web/screenshots --open --threshold 0.005 --force",
+ "pp_web:e2e:keycloak": "testcafe -c 4 'chrome:headless --allow-insecure-localhost --ignore-certificate-errors' ./web/tests/e2e//-tests.js --fixture-meta testable=true --reporter spec,junit:e2e_report.xml,html:e2e_report.html --selector-timeout 30000 --assertion-timeout 30000 --page-load-timeout 50000 --skip-js-errors --disable-page-caching -q",
+ "pp_web:e2e:regression": "testcafe -c 2 firefox:headless ./web/tests/e2e//-tests.js --fixture-meta testable=true --test-meta regression=true --reporter spec,junit:regression_report.xml,html:regression_report.html --selector-timeout 30000 --assertion-timeout 30000 --page-load-timeout 50000 --skip-js-errors -q",
+ "pp_web:e2e:sanity": "testcafe -c 2 firefox:headless ./web/tests/e2e//-tests.js --fixture-meta testable=true --test-meta sanity=true --reporter spec,junit:sanity_report.xml,html:sanity_report.html --selector-timeout 30000 --assertion-timeout 30000 --page-load-timeout 50000 --skip-js-errors -q"
+},
+"dependencies": {
+ "testcafe": "3.3.0"
+},
+"devDependencies": {
+ "bufferutil": "^4.0.1",
+ "eslint-plugin-testcafe": "^0.2.1",
+ "testcafe-blink-diff": "^0.5.5",
+ "testcafe-reporter-html": "^1.4.4",
+ "testcafe-reporter-junit": "^3.0.0",
+ "utf-8-validate": "^5.0.2",
+ "yargs": "^13.2.1"
+},
+"engines": {
+ "node":"18.x"
+}
+}
