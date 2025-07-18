@@ -9,7 +9,7 @@
  "name": "Orchestral Developments Ltd."
 },
 "scripts": {
- "dfd:e2e": "testcafe -c 3 chrome ./dfd/tests/e2e/*/*-tests.js --fixture-meta testable=true --selector-timeout 30000 --assertion-timeout 30000 --page-load-timeout 50000 --skip-js-errors --allow-insecure-localhost --allow-running-insecure-content -q",
+ "dfd:e2e": "testcafe -c 5 chrome:headless,edge:headless  ./dfd/tests/e2e/*/*-tests.js --fixture-meta testable=true --selector-timeout 30000 --assertion-timeout 30000 --page-load-timeout 50000 --skip-js-errors --allow-insecure-localhost --allow-running-insecure-content",
  "dfd:remote": "testcafe remote ./dfd/tests/e2e//-tests.js --qr-code",
  "pp_web:e2e": "testcafe -c 4 chrome ./web/tests/e2e//-tests.js --fixture-meta testable=true --reporter spec,junit:e2e_report.xml,html:e2e_report.html --selector-timeout 30000 --assertion-timeout 30000 --page-load-timeout 50000 --skip-js-errors -q",
  "pp_web:e2e:actualImage": "testcafe -c 2 firefox:headless ./web/tests/visual-regression//-tests.js --fixture-meta testable=true --reporter spec,junit:actual_report.xml,html:actual_report.html -s ./acceptance-tests/web/screenshots/ -p '${BROWSER}/${FIXTURE}/${TEST}/actual.png' --selector-timeout 30000 --assertion-timeout 30000 --page-load-timeout 50000 --skip-js-errors -q",
